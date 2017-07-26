@@ -18,16 +18,24 @@ import timber.log.Timber;
  */
 public class ScaleListAdapter extends BaseAdapter {
 
-    /** Context */
+    /**
+     * Context
+     */
     private final Context mContext;
 
-    /** レイアウト生成用のInflater */
+    /**
+     * レイアウト生成用のInflater
+     */
     private final LayoutInflater mInflater;
 
-    /** ScaleManager */
+    /**
+     * ScaleManager
+     */
     private final ScaleManager mScaleManager;
 
-    /** スケールの一覧 */
+    /**
+     * スケールの一覧
+     */
     private List<Scale> mScales = new CopyOnWriteArrayList<>();
 
     public ScaleListAdapter(Context context, ScaleManager scaleManager) {

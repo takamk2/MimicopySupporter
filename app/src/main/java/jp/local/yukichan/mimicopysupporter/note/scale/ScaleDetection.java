@@ -1,7 +1,5 @@
 package jp.local.yukichan.mimicopysupporter.note.scale;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +48,7 @@ public class ScaleDetection {
     public List<Scale> detect() {
         Timber.i("detect");
 
-        // TODO: NotesにヒットするScaleだけを返すようにする
+        // TODO: 整理する
         List<Scale> scales = new ArrayList<>();
         for (ScaleConstituent scaleConstituent : ScaleConstituent.values()) {
             for (RootNote rootNote : RootNote.values()) {
@@ -59,7 +57,17 @@ public class ScaleDetection {
                         .setScaleConstituent(scaleConstituent)
                         .build();
                 if (scale != null) {
-                    scales.add(scale);
+                    List<RootNote> rootNotesInScale = scale.getRootNotes();
+                    List<RootNote> inputNotes = mNotes.getRootNotes();
+                    boolean isAvoid = false;
+                    for (RootNote n : inputNotes) {
+                        if (!rootNotesInScale.contains(n)) {
+                            isAvoid = true;
+                        }
+                    }
+                    if (!isAvoid) {
+                        scales.add(scale);
+                    }
                 }
             }
         }

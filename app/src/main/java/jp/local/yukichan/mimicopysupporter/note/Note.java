@@ -32,12 +32,16 @@ public enum Note {
     C4(48, C), CS4(49, CS), D4(50, D), DS4(51, DS), E4(52, E), F4(53, F), FS4(54, FS),
     G4(55, G), GS4(56, GS), A4(57, A), AS4(58, AS), B4(59, B);
 
+    private static final int OCTAVE_INTERVAL = 12;
+
     private final Integer mNo;
     private final RootNote mRootNote;
+    private final String mFileName;
 
     Note(Integer no, RootNote rootNote) {
         mNo = no;
         mRootNote = rootNote;
+        mFileName = name().toLowerCase() + ".wav";
     }
 
     public static Note getNote(Integer noteNo) {
@@ -50,5 +54,19 @@ public enum Note {
         }
 
         return null;
+    }
+
+    public static Note getNote(int octave, int keyNo) {
+        int noteNo = octave * OCTAVE_INTERVAL + keyNo;
+        Timber.i("getNote(octave=%d, keyNote=%d) noteNo=%d", octave, keyNo, noteNo);
+        return getNote(noteNo);
+    }
+
+    public RootNote getRootNote() {
+        return mRootNote;
+    }
+
+    public String getFileName() {
+        return mFileName;
     }
 }

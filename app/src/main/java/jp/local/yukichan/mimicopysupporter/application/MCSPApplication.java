@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import jp.local.yukichan.mimicopysupporter.note.scale.ScaleManager;
+import jp.local.yukichan.mimicopysupporter.sound.SoundManager;
 import timber.log.Timber;
 
 /**
@@ -17,6 +18,9 @@ public class MCSPApplication extends Application {
 
     /** スケール保存や取得を行うためのクラス */
     private ScaleManager mScaleManager;
+
+    /** 音声の読み込みと再生を行うためのクラス */
+    private SoundManager mSoundManager;
 
     /** Initializeが完了しているかどうかフラグ */
     private boolean mIsInitialized = false;
@@ -76,6 +80,15 @@ public class MCSPApplication extends Application {
     }
 
     /**
+     * SoundManagerの取得
+     *
+     * @return SoundManager
+     */
+    public SoundManager getSoundManager() {
+        return mSoundManager;
+    }
+
+    /**
      * Listenerの登録
      *
      * @param appListener
@@ -103,6 +116,7 @@ public class MCSPApplication extends Application {
             @Override
             public void run() {
                 mScaleManager = new ScaleManager(getApplicationContext());
+                mSoundManager = new SoundManager(getApplicationContext());
                 mIsInitialized = true;
                 notifyInitialized();
             }

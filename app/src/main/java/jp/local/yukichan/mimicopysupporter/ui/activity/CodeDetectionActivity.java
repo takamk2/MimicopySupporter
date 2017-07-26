@@ -4,11 +4,14 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toolbar;
 
 import jp.local.yukichan.mimicopysupporter.R;
+import jp.local.yukichan.mimicopysupporter.ui.fragment.DetectedCodeListFragment;
 import jp.local.yukichan.mimicopysupporter.ui.fragment.DisplaySelectedCodeFragment;
 import jp.local.yukichan.mimicopysupporter.ui.fragment.DisplaySelectedScaleFragment;
 import jp.local.yukichan.mimicopysupporter.ui.fragment.DisplaySelectedScaleFragment.DisplayType;
+import jp.local.yukichan.mimicopysupporter.ui.fragment.KeyboardFragment;
 import timber.log.Timber;
 
 /**
@@ -21,6 +24,12 @@ public class CodeDetectionActivity extends BaseActivity {
 
     /** 選択したコードを表示するFragment */
     private DisplaySelectedCodeFragment mDisplaySelectedCodeFragment;
+
+    /** 候補コード一覧を表示するFragment */
+    private DetectedCodeListFragment mDetectedCodeListFragment;
+
+    /** キーボードFragment　*/
+    private KeyboardFragment mKeyboardFragment;
 
     /**
      * Activityの起動
@@ -39,6 +48,9 @@ public class CodeDetectionActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_code_detection);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setActionBar(toolbar);
+
         initializeFragments();
     }
 
@@ -56,6 +68,8 @@ public class CodeDetectionActivity extends BaseActivity {
         mDisplaySelectedScaleFragment =
                 DisplaySelectedScaleFragment.newInstance(DisplayType.DISPLAY);
         mDisplaySelectedCodeFragment = DisplaySelectedCodeFragment.newInstance();
+        mDetectedCodeListFragment = DetectedCodeListFragment.newInstance();
+        mKeyboardFragment = KeyboardFragment.newInstance();
 
         FragmentTransaction transaction;
         transaction = getFragmentManager().beginTransaction();
@@ -63,6 +77,9 @@ public class CodeDetectionActivity extends BaseActivity {
                 DisplaySelectedScaleFragment.TAG);
         transaction.add(R.id.fragment_display_selected_code, mDisplaySelectedCodeFragment,
                 DisplaySelectedCodeFragment.TAG);
+        transaction.add(R.id.fragment_detected_code_list, mDetectedCodeListFragment,
+                DetectedCodeListFragment.TAG);
+        transaction.add(R.id.fragment_keyboard, mKeyboardFragment, KeyboardFragment.TAG);
         transaction.commit();
     }
 }

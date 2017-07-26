@@ -12,6 +12,7 @@ import jp.local.yukichan.mimicopysupporter.note.scale.ScaleManager;
 import jp.local.yukichan.mimicopysupporter.ui.fragment.DetectedScaleListFragment;
 import jp.local.yukichan.mimicopysupporter.ui.fragment.DisplaySelectedScaleFragment;
 import jp.local.yukichan.mimicopysupporter.ui.fragment.DisplaySelectedScaleFragment.DisplayType;
+import jp.local.yukichan.mimicopysupporter.ui.fragment.KeyboardFragment;
 import timber.log.Timber;
 
 /**
@@ -24,6 +25,9 @@ public class ScaleDetectionActivity extends Activity {
 
     /** 検出したスケールの一覧を表示するFragment */
     private DetectedScaleListFragment mDetectionScaleListFragment;
+
+    /** Keyboardを表示するFragment */
+    private KeyboardFragment mKeyboardFragment;
 
     /** ScaleManager */
     private ScaleManager mScaleManager;
@@ -58,12 +62,14 @@ public class ScaleDetectionActivity extends Activity {
         mDisplaySelectedScaleFragment =
                 DisplaySelectedScaleFragment.newInstance(DisplayType.EDIT);
         mDetectionScaleListFragment = DetectedScaleListFragment.newInstance();
+        mKeyboardFragment = KeyboardFragment.newInstance();
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.add(R.id.fragment_display_selected_scale, mDisplaySelectedScaleFragment,
                 DisplaySelectedScaleFragment.TAG);
         transaction.add(R.id.fragment_detected_scale_list, mDetectionScaleListFragment,
                 DetectedScaleListFragment.TAG);
+        transaction.add(R.id.fragment_keyboard, mKeyboardFragment, KeyboardFragment.TAG);
         transaction.commit();
     }
 }

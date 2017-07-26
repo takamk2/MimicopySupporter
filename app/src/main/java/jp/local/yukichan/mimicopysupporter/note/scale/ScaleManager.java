@@ -48,8 +48,6 @@ public class ScaleManager {
         mContext = context;
         ScaleDetection scaleDetection = new ScaleDetection();
         mHoleScaleList = scaleDetection.detect();
-        mSelectedScale = mHoleScaleList.get(1);
-        mSelectedScaleProvisional = mSelectedScale;
     }
 
     /**
